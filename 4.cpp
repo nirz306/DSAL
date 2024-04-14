@@ -101,13 +101,13 @@ void hashtable :: insertwithreplacement() {
                 return;
             }
             else if((arr[i].tele)%10 != i && count == 0){
-                int temptele = arr[i].tele;
-                string tempname = arr[i].name;
+                int temptele = arr[i].tele; //juna no store kartoy
+                string tempname = arr[i].name; //juna name store kartoy 
                 cout << "Enter the name of person: ";
                 cin >> arr[i].name;
                 arr[i].tele = t;
                 int j;
-                for(j = (i+1)%10; j != i; j = (j+1)%10) {
+                for(j = (i+1)%10; j != i; j = (j+1)%10) {  //old values takayla jaga shodh 
                     if(arr[j].name == "-" ) {
                         arr[j].name = tempname;
                         arr[j].tele = temptele;
