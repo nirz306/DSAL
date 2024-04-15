@@ -306,7 +306,6 @@ void postorder2(node* root)
     }
 }
 
-static int leaf = 0;
 static int int_nodes = 0;
 
 
