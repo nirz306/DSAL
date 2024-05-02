@@ -7,16 +7,17 @@ comparable, and Keys must be unique. Standard Operations: Insert
 #include <iostream>
 using namespace std;
 class node {
+    private:
+     string value;
+     string key;
+     node* next;
     public:
-    string value;
-    string key;
-    node* next;
-
-    node(string key, string value) {
-        this -> key = key;
-        this -> value = value;
-        this -> next = NULL;
-    }
+     node(string key, string value) {
+         this -> key = key;
+         this -> value = value;
+         this -> next = NULL;
+     }
+    friend class DLL;
 };
 
 class DLL {
