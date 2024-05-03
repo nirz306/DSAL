@@ -218,8 +218,8 @@ void Tree::preorder_iter(node* root){
     Note that right child is pushed first so that left is processed first */
     while (nodeStack.empty() == false) {
         // Pop the top item from stack and print it
-        struct node* node = nodeStack.top();
-        printf("%d ", node->data);
+        node* node = nodeStack.top();
+        cout<<node->data<<" ";
         nodeStack.pop();
  
         // Push right and left children of the popped node to stack
