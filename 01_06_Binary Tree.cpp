@@ -274,7 +274,7 @@ int Tree::internal_nodes(node* root){
     node* root = NULL;
     t1.buildTree(root);
     t1.displayTree(root);
-    t1.mirrorTree(root);
+   
     int height = t1.heightTree(root);
     cout<<"The height of the tree is: "<<height<<endl;
 
@@ -291,11 +291,12 @@ int Tree::internal_nodes(node* root){
     cout<<"The postorder traversal of the tree using iterative is: ";
     t1.postorder_iter(root);  cout<<endl;
 
-
-   //need to check if the pre,post and inorder traversal are correct or not
-
     int leaves = t1.leaves(root);
     cout<<"No of leaves in the tree is: "<<leaves<<endl;
     int int_nodes = t1.internal_nodes(root);
     cout<<"No of internal nodes in the tree is: "<<int_nodes<<endl;
+
+     t1.mirrorTree(root);
+     cout<<"Displaying the mirror tree: "<<endl;
+    t1.displayTree(root);
 }
