@@ -8,14 +8,15 @@ number of comparisons required to find a set of telephone numbers
 using namespace std;
 
 class record {
-    public:
-        int tele;
-        string name;
+    long long tele;
+    string name;
 
+    public:
     record() {
-        tele = 0000;
+        tele = 0000000000;
         name = "-";
     }
+    friend class hashtable;
 };
 
 class hashtable {
@@ -25,7 +26,16 @@ class hashtable {
     void insertwithoutreplacement();
     void insertwithreplacement();
     void search();
+    void display();
 };
+
+void hashtable::display(){
+       cout << "----------------------------------------" << endl;
+        for(int i = 0; i < 10; i++) {
+            cout << arr[i].name << "  " << arr[i].tele << endl;
+        }
+        cout << "----------------------------------------" << endl;
+} 
 
 void hashtable :: initialize() {
     for(int i = 0; i < 10; i++) {
@@ -34,10 +44,11 @@ void hashtable :: initialize() {
     }
 }
 void hashtable :: insertwithoutreplacement() {
-    int t;
+    long long t;
     cout << "Enter the telephone number: ";
     cin >> t;
     int index = (t%10);
+    cout<<index<<endl;
     if(arr[index].name == "-") {
         cout << "Enter the name: ";
         cin >> arr[index].name;
@@ -62,7 +73,7 @@ void hashtable :: insertwithoutreplacement() {
 }
 
 void hashtable :: search() {
-    int num;
+    long long num;
     cout << "Enter the telephone number: ";
     cin >> num;
     int index = num%10;
@@ -86,7 +97,7 @@ void hashtable :: search() {
 }
 
 void hashtable :: insertwithreplacement() {
-    int t;
+    long long t;
     cout << "Enter the telephone number: ";
     cin >> t;
     int index = (t%10);
@@ -134,6 +145,7 @@ void hashtable :: insertwithreplacement() {
 
 int main() {
     hashtable h;
+    record r;
     h.initialize();
     while(1) {
         cout << "1.insert without replacement" << endl;
@@ -154,10 +166,6 @@ int main() {
         else {
             break;
         }
-        cout << "----------------------------------------" << endl;
-        for(int i = 0; i < 10; i++) {
-            cout << h.arr[i].name << "  " << h.arr[i].tele << endl;
-        }
-        cout << "----------------------------------------" << endl;
+     h.display();
     }
 }
