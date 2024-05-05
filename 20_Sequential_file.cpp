@@ -154,8 +154,9 @@ int main()
                 cout<<"Enter division:";
                 cin>>div;
                 cout<<"Enter address:";
-                cin.ignore();
-                getline(cin,add);
+                // cin.ignore();
+                // getline(cin,add);
+                cin>>add;
                 student s(roll_no,name,div,add);
                 myfile<<s;
             }
