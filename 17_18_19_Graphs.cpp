@@ -22,7 +22,7 @@ class Graph{
     int vertices;
     int edge;
     Node* root = NULL;
-    Node* temp1 = root;
+    Node* temp1 = root;			//to insert new vertices
 
     public:
         
@@ -32,7 +32,7 @@ class Graph{
                 int val; 
                 cout<<"\nEnter the starting node: "; cin>>val;
                 Node* newNode = new Node(val);
-                if(root == NULL){
+                if(root == NULL){ 		//to insert the first element
                     root = newNode;
                     temp1 = root;
                 }
@@ -40,7 +40,7 @@ class Graph{
                     temp1->down = newNode;
                     temp1 = temp1->down;
                 }
-                Node* temp = temp1;;
+                Node* temp = temp1;;	//to traverse or insert neighbours horizontally
                 cout<<"How many edges are connected with "<<val<<": "; cin>>edge;
                  for(int j=0;j<edge;j++){
                     cout<<"Enter the ending node of <<"<<val<<": "; cin>>val;
