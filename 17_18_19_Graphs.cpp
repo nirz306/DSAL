@@ -67,7 +67,7 @@ class Graph{
                 ls.push_back(node);
 
                 Node* point = findNode(node);
-                point = point->next;
+                point = point->next;		//point will point to its first neighbour
 
                 while(point){
                     if(!vis[point->data]){
