@@ -1,3 +1,5 @@
+// Implement the Heap sort algorithm for demonstrating heap data structure with modularity 
+// of programming language (consider integer data
 #include<iostream>
 using namespace std;
 
