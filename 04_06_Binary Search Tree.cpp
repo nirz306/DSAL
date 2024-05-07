@@ -102,15 +102,15 @@ class BST{
             stack <Node*> s;
 
             Node* current = root;
-            while(current!=NULL || !s.empty()){
-                while(current !=NULL ){
+            while(current!=NULL || !s.empty()){                
+                while(current !=NULL ){                       //go right for reaching the maximum element and push ele in stack 
                         s.push(current);
                         current = current->right;
                 }
                 current = s.top();
                 s.pop();
                 cout<<current->data<<" ";
-                current = current->left;
+                current = current->left;                    //go left now finding the next greatest ele
             }
           cout<<endl;
         }
