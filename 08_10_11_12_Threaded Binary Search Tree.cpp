@@ -162,7 +162,7 @@ void tbt::remove(int x)
     node *c=root;
     node *p=root;
     int flag=0;
-    while(flag!=1)
+    while(flag!=1)            //assign parent and child to the desired node
     {
         if(c->data==x)
         {
@@ -179,47 +179,47 @@ void tbt::remove(int x)
             c=c->left;
         }
     }
-    if(c->lthread==1 && c->rthread==1)
+    if(c->lthread==1 && c->rthread==1)  //node to be deleted is a left node
     {
-        if(p->left==c)
+        if(p->left==c)                    //node to deleted is left child of its parent
         {
             p->left=c->left;
             p->lthread=1;
             delete(c);
         }
-        else if(p->right==c)
+        else if(p->right==c)            //node to deleted is right child of its parent
         {
             p->right=c->right;
             p->rthread=1;
             delete(c);
         }
     }
-    else if(c->lthread==1 || c->rthread==1)
+    else if(c->lthread==1 || c->rthread==1)       
     {
-        if(p->right==c)
+        if(p->right==c)                 //node to deleted is right child of its parent
         {
-            if(c->lthread==1)
+            if(c->lthread==1)            //right subtree exists
             {
                 c->right->left=p;
                 p->right=c->right;
                 delete(c); 
             }
-            else if(c->rthread==1)
+            else if(c->rthread==1)            //left subtree exists
             {
                 c->left->right=c->right;
                 p->right=c->left;
                 delete(c);
             }
         }
-        else if(p->left==c)
+        else if(p->left==c)            //node to deleted is left child of its parent
         {
-            if(c->lthread==1)
+            if(c->lthread==1)            //right subtree exists
             {
                 c->right->left=c->left;
                 p->left=c->right;
                 delete(c); 
             }
-            else if(c->rthread==1)
+            else if(c->rthread==1)         //left subtree exists
             {
                 c->left->right=p;
                 p->left=c->left;
