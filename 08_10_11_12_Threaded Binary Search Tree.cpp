@@ -118,7 +118,7 @@ node *tbt::inordersucc(node *c)
     {
         return c->right;
     }
-    else
+    else                            //jar leaf nasel tar ekda right ja ani salag left jaat raha 
     {
         c=c->right;
         while(c->lthread!=1)
