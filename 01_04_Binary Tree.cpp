@@ -155,7 +155,7 @@ void Tree::inorder_iter(node* root){
     stack<node*> s;
     node* curr = root;
  
-    while (curr != NULL || s.empty() == false) {
+    while (curr != NULL || !s.empty()) {
          
         // Reach the left most Node of the
         // curr Node
