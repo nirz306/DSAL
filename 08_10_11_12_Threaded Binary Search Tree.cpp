@@ -114,7 +114,7 @@ void tbt::inorder(node *c)
 
 node *tbt::inordersucc(node *c)
 {
-    if(c->rthread==1)
+    if(c->rthread==1)                //jar leaf asel tar
     {
         return c->right;
     }
