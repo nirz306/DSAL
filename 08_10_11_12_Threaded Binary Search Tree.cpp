@@ -5,8 +5,8 @@ class node
     int data;
     node *left;
     node *right;
-    bool lthread; //lthread points to the inorder predecessor 
-    bool rthread; //rthread points to the inorder successor 
+    bool lthread;
+    bool rthread;
     public:
     node()
     {
@@ -27,7 +27,7 @@ class tbt
     tbt()
     {
         root=NULL;
-        head=new node;   //this is the header node
+        head=new node;
     }
     void insert(int x);
     void inorder(node *c);
@@ -43,11 +43,9 @@ void tbt::insert(int x)
 {
     node *new1=new node;
     new1->data=x;
-    node *c=root; //child
-    node *p=root; //parent
+    node *c=root;
+    node *p=root;
     int flag=0;
-
-    //inserting the first node 
     if(root==NULL)
     {
         root=new1;
@@ -63,21 +61,21 @@ void tbt::insert(int x)
         {
             return;
         }
-        if(c->data<x)//go right
+        if(c->data<x)
         {
             
-            if(c->rthread==1)           //rthread == 1 mnjhe ki right pointer head la point kartoy , or ki rthread exists kartoy (the dotted )
+            if(c->rthread==1)
             {
                 new1->right=c->right;
                 new1->left=c;
                 c->right=new1;
-                c->rthread=0;           
+                c->rthread=0;
                 flag=1;
             }
             p=c;
             c=c->right;
         }
-        else if(c->data>x) //go left
+        else if(c->data>x)
         {
             
             if(c->lthread==1)
@@ -99,11 +97,9 @@ void tbt::insert(int x)
 
 void tbt::inorder(node *c)
 {
-    //to reach at the smallest 
     while(c->left != head){
         c = c->left;
     }
-    //atta head var ahe
     while(c->right != head){
         cout<<c->data<<" ";
         c = inordersucc(c);
@@ -114,11 +110,11 @@ void tbt::inorder(node *c)
 
 node *tbt::inordersucc(node *c)
 {
-    if(c->rthread==1)                //jar leaf asel tar
+    if(c->rthread==1)
     {
         return c->right;
     }
-    else                            //jar leaf nasel tar ekda right ja ani salag left jaat raha 
+    else
     {
         c=c->right;
         while(c->lthread!=1)
@@ -130,7 +126,7 @@ node *tbt::inordersucc(node *c)
     }
 }
 
-node* tbt::preorder(node *c) //root->left->right
+node* tbt::preorder(node *c)
 {
     while(c->left!=head)
     {
@@ -162,123 +158,99 @@ void tbt::remove(int x)
     node *c=root;
     node *p=root;
     int flag=0;
-    while(flag!=1)            //assign parent and child to the desired node
-    {
+    while(flag!=1){
         if(c->data==x)
-        {
             flag=1;
-        }
-        if(c->data<x)
-        {
+        
+        if(c->data<x){
             p=c;
             c=c->right;
         }
-        else if(c->data>x)
-        {
+        else if(c->data>x){
             p=c;
             c=c->left;
         }
     }
-    if(c->lthread==1 && c->rthread==1)  //node to be deleted is a left node
-    {
-        if(p->left==c)                    //node to deleted is left child of its parent
+
+        //2 Links
+        if (c->lthread == 0 && c->rthread == 0)
         {
-            p->left=c->left;
-            p->lthread=1;
-            delete(c);
+            node *cs = c->right;
+            p = c;
+            while (cs->lthread == 0)
+            {
+                p = cs;
+                cs = cs->left;
+            }
+            c->data = cs->data;
+            c = cs;
+            cout<<"Deleting node Having 2 links"<<endl;
         }
-        else if(p->right==c)            //node to deleted is right child of its parent
+
+        // leaf node 
+        if (c->lthread == 1 && c->rthread == 1)
         {
-            p->right=c->right;
-            p->rthread=1;
-            delete(c);
+            if (p->left == c)       //child is the left child of parent
+            {
+                cout<<"Deleting Leaf (Left)"<<endl;
+                p->left = c->left;
+                p->lthread = 1;
+            }
+            else
+            {
+                cout<<"Deleting Leaf (Right)"<<endl;
+                p->right = c->right;
+                p->rthread = 1;
+            }
+            delete c;
         }
-    }
-    else if(c->lthread==1 || c->rthread==1)       
-    {
-        if(p->right==c)                 //node to deleted is right child of its parent
+
+        // left Link, right thread
+        if (c->lthread == 0 && c->rthread == 1)
         {
-            if(c->lthread==1)            //right subtree exists
+            node *temp = c->left;
+            if (p->left == c)
             {
-                c->right->left=p;
-                p->right=c->right;
-                delete(c); 
+                p->left = temp;
             }
-            else if(c->rthread==1)            //left subtree exists
+
+            else
             {
-                c->left->right=c->right;
-                p->right=c->left;
-                delete(c);
+                p->right = temp;
             }
+
+            while (temp->rthread == 0)
+            {
+                temp = temp->right;
+            }
+            temp->right = c->right;
+            cout<<"Deleting node with left link"<<endl;
+            delete c;
         }
-        else if(p->left==c)            //node to deleted is left child of its parent
+
+        // right link, left thread
+        if (c->lthread == 1 && c->rthread == 0)
         {
-            if(c->lthread==1)            //right subtree exists
+            node *temp = c->right;
+            if (p->left == c)
             {
-                c->right->left=c->left;
-                p->left=c->right;
-                delete(c); 
+                p->left = temp;
             }
-            else if(c->rthread==1)         //left subtree exists
+            else
             {
-                c->left->right=p;
-                p->left=c->left;
-                delete(c);
+                p->right = temp;
             }
+
+            while (temp->lthread == 0)
+            {
+                temp = temp->left;
+            }
+            temp->left = c->left;
+            cout<<"Deleting node with right link"<<endl;
+            delete c;
         }
-    }
-    else if(c->lthread!=1 && c->rthread!=1)
-        {
-            node *p=c;
-            node* q=inordersucc(c);
-            c=c->right;
-            while(c->left!=q && c!=q)
-            {
-                c=c->left;
-            }
-            int temp=p->data;
-            p->data=q->data;
-            q->data=temp;
-            if(c->left==q)
-            {
-                if(q->rthread!=1)
-                {
-                    // c->left=q->right;
-                    node *r=q;
-                    q=q->right;
-                    while(q->lthread!=1)
-                    {
-                        q=q->left;
-                    }
-                    q->left=r->left;
-                    c->left=r->right;
-                    delete(r);
-                }
-                else if(q->rthread==1)
-                {
-                    c->left=q->left;
-                    c->lthread=1;
-                    delete(q);
-                }
-                
-            }
-            else if(c==q)
-            {
-                if(q->rthread==1)
-                {
-                    p->right=q->right;
-                    p->rthread=1;
-                    delete(q);
-                }
-                else if(q->rthread!=1)
-                {
-                    p->right=q->right;
-                    q->right->left=q->left;
-                    delete(q);
-                }
-                
-            }
-        }
+    
+    
 }
 node* tbt::get_root()
 {
