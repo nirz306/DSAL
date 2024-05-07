@@ -17,7 +17,7 @@ class node{
 };
 
 class Tree {
-public:
+    node* root;
     void buildTree(node* &root);
     void displayTree(node* root);
     void mirrorTree(node* root);
@@ -30,6 +30,20 @@ public:
     void postorder_iter(node* root);
     int leaves(node* root);
     int internal_nodes(node* root);
+
+    public:
+        void buildTree(){buildTree(root);}
+        void displayTree(){displayTree(root);}
+        void mirrorTree(){mirrorTree(root);}
+        int heightTree( ){heightTree(root);}
+        void inorder_rec( ){inorder_rec(root);}   //left,node,right
+        void preorder_rec( ){preorder_rec(root);}     //node, left,right
+         void postorder_rec( ){postorder_rec(root);} 
+        void postrder_iter( ){postorder_iter(root);}
+        void preorder_iter( ){preorder_iter(root);}
+        void inorder_iter( ){inorder_iter(root);}
+        int leaves( ){int leaf = leaves(root); cout<<"Leaves are: "<<leaf<<endl;}
+        int internal_nodes( ){int intnodes = internal_nodes(root); cout<<"Internal nodes are: "<<intnodes<<endl;}
     };
 
 void Tree::buildTree(node* &root){
@@ -271,32 +285,31 @@ int Tree::internal_nodes(node* root){
 
  int main(){
     Tree t1;
-    node* root = NULL;
-    t1.buildTree(root);
-    t1.displayTree(root);
    
-    int height = t1.heightTree(root);
+    t1.buildTree();
+    t1.displayTree();
+   
+    int height = t1.heightTree();
     cout<<"The height of the tree is: "<<height<<endl;
 
     cout<<"The inorder traversal of the tree using recurssion is: ";
-    t1.inorder_rec(root);   cout<<endl;
+    t1.inorder_rec();   cout<<endl;
     cout<<"The inorder traversal of the tree using iterative is: ";
-    t1.inorder_iter(root);  cout<<endl;
+    t1.inorder_iter();  cout<<endl;
     cout<<"The preorder traversal of the tree using recurssion is: ";
-    t1.preorder_rec(root);  cout<<endl;
+    t1.preorder_rec();  cout<<endl;
     cout<<"The preorder traversal of the tree using iterative is: ";
-    t1.preorder_iter(root);  cout<<endl;
+    t1.preorder_iter();  cout<<endl;
     cout<<"The postorder traversal of the tree using recurssion is: ";
-    t1.postorder_rec(root);  cout<<endl;
+    t1.postorder_rec();  cout<<endl;
     cout<<"The postorder traversal of the tree using iterative is: ";
-    t1.postorder_iter(root);  cout<<endl;
+    t1.postrder_iter();  cout<<endl;
 
-    int leaves = t1.leaves(root);
-    cout<<"No of leaves in the tree is: "<<leaves<<endl;
-    int int_nodes = t1.internal_nodes(root);
-    cout<<"No of internal nodes in the tree is: "<<int_nodes<<endl;
+     t1.leaves();
+    t1.internal_nodes();
+ 
 
-     t1.mirrorTree(root);
+     t1.mirrorTree();
      cout<<"Displaying the mirror tree: "<<endl;
-    t1.displayTree(root);
+    t1.displayTree();
 }
