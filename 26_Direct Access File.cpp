@@ -78,7 +78,7 @@ public:
 
     file.seekp(hash * sizeof(Student), ios::beg);
 
-    file.write((char *)&dummy, sizeof(dummy));
+    file.write((char *)&dummy, sizeof(dummy));   //overwrites the data will nothing 
     file.close();
   }
 
