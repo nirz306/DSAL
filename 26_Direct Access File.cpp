@@ -44,8 +44,8 @@ void hash1::insert(int roll_no,int loc)
     {
         int temp=arr[hashindex];                           //if already any ele is present tar tyala temp assign kar 
         int temp1=arr1[hashindex];
-        if(hashindex==hashcode(temp))                       //hashing with replacement
-        {
+        if(hashindex==hashcode(temp))                       //hashing with replacement 
+        {                                                    //existing jar correctly hashed asel tar 
             while(arr[hashindex]!=-1)
             {
                 hashindex=(hashindex+1)%10;
@@ -55,13 +55,13 @@ void hash1::insert(int roll_no,int loc)
         }
         else                                    
         {
-            arr[hashindex]=roll_no;
+            arr[hashindex]=roll_no;                    //replace the elements
             arr1[hashindex]=loc;
             while(arr[hashindex]!=-1)
             {
                 hashindex=(hashindex+1)%10;
             }
-            arr[hashindex]=temp;
+            arr[hashindex]=temp;                        //juna values atta put kar
             arr1[hashindex]=temp1;
         }
     }
